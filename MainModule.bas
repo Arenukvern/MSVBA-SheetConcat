@@ -37,7 +37,7 @@ Private Function addset_sht( _
     ' If the sub goes here, then sheet is note exists
     'and we will create it
     Dim shtNew As Worksheet
-    Set shtNew = .Worksheets.Add
+    Set shtNew = .Worksheets.Add(After:=Worksheets(Worksheets.Count))
     shtNew.Name = strSheetName
     Set addset_sht = shtNew
   End With
@@ -57,23 +57,47 @@ Public Sub ActiveSheetsConcat()
   
   Const NAMESHTTOTAL As String = "Total"
   Const DATACOPYCOLUMNS As Integer = 30
-  'Important note: we will recreate whole workbook
-  'to handle limit in 65536 rows in older versions of excel.
-  ' There need to do some check of this version, then
-  ' we will handle this problem in more accurate way
+
   Dim wbkActive As Workbook
   Dim wbkNewBook As Workbook
+  Dim blnIsNewBookCreated As Boolean
   Set wbkActive = ActiveWorkbook
-  Set wbkNewBook = Workbooks.Add
-  wbkActive.Activate
+  ' We need to do check of an extension
+  '
+  With wbkActive
+    Select Case True
+      Case .FileFormat = xlOpenXMLWorkbookMacroEnabled _
+      Or .FileFormat = xlWorkbookDefault _
+      Or .FileFormat = xlExcel12
+        Set wbkNewBook = wbkActive
+        blnIsNewBookCreated = False
+        
+      Case .FileFormat = xlWorkbookNormal _
+      Or .FileFormat = xlExcel9795 _
+      Or .FileFormat = xlExcel8 _
+      Or .FileFormat = xlExcel7 _
+      Or .FileFormat = xlExcel5 _
+      Or .FileFormat = xlExcel4 _
+      Or .FileFormat = xlExcel3 _
+      Or .FileFormat = xlExcel2FarEast _
+      Or .FileFormat = xlExcel2
+        'Important note: we will recreate whole workbook
+        'to handle limit in 65536 rows in older versions of excel.
+        Set wbkNewBook = Workbooks.Add
+        blnIsNewBookCreated = True
+        wbkActive.Activate
+    End Select
+  End With
   
   Set shtTotal = addset_sht(wbkNewBook, NAMESHTTOTAL)
+  
   Dim shtWork As Worksheet
   Dim rngFirstCell As Range
   For Each shtWork In wbkActive.Worksheets
     
     With shtWork
       If NAMESHTTOTAL = .Name Then GoTo nexti
+      
       Set rngFirstCell = .Range("A1")
       lastrow = rngFirstCell.CurrentRegion.Rows.Count
       strNameShtWork = .Name
@@ -83,7 +107,6 @@ Public Sub ActiveSheetsConcat()
     With shtTotal
       Set rngFirstCell = .Range("A1")
       lastrow2 = rngFirstCell.CurrentRegion.Rows.Count + 1
-      
       Set rngDataPaste = .Range(.Cells(lastrow2, 2), _
         .Cells(lastrow2 + lastrow - 1, DATACOPYCOLUMNS + 1))
       rngDataPaste.Value = rngDataCopy
@@ -93,8 +116,9 @@ Public Sub ActiveSheetsConcat()
     
 nexti:
   Next shtWork
-  
-  wbkActive.Close SaveChanges:=False
-  wbkNewBook.Activate
-
+  Select Case blnIsNewBookCreated
+    Case True
+      wbkActive.Close SaveChanges:=False
+      wbkNewBook.Activate
+  End Select
 End Sub
