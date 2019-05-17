@@ -5,7 +5,7 @@ Private Function SheetExistence( _
   ByRef wbkActive As Workbook, _
   ByVal strSheetNameToFind As String, _
   ByVal blnSheetExists As Boolean) As Boolean
-  
+
   Dim objSheet As Object
     For Each objSheet In wbkActive.Worksheets
       If strSheetNameToFind = objSheet.Name _
@@ -14,20 +14,20 @@ Private Function SheetExistence( _
         Exit Function
       End If
     Next objSheet
-    
+
 End Function
 
 Private Function addset_sht( _
   ByRef wbkActive As Workbook, _
   ByVal strSheetName As String) As Worksheet
-  
+
   Dim blnSheetExists As Boolean
- 
+
   blnSheetExists = SheetExistence( _
     wbkActive, _
     strSheetName, _
     False)
-    
+
   With wbkActive
     Select Case blnSheetExists
       Case True
@@ -37,16 +37,16 @@ Private Function addset_sht( _
     ' If the sub goes here, then sheet is note exists
     'and we will create it
     Dim shtNew As Worksheet
-    Set shtNew = .Worksheets.Add(After:=Worksheets(Worksheets.Count))
+    Set shtNew = .Worksheets.Add(After:=.Worksheets(.Worksheets.Count))
     shtNew.Name = strSheetName
     Set addset_sht = shtNew
   End With
-    
+
 End Function
 
 Public Sub ActiveSheetsConcat()
   Application.Calculation = xlManual
-  
+
   Dim shtTotal As Worksheet
   Dim rngDataPaste As Range
   Dim rngDataCopy As Variant
@@ -54,7 +54,7 @@ Public Sub ActiveSheetsConcat()
   Dim strNameShtWork As String
   Dim lastrow As Long
   Dim lastrow2 As Long
-  
+
   Const NAMESHTTOTAL As String = "Total"
   Const DATACOPYCOLUMNS As Integer = 30
 
@@ -71,7 +71,7 @@ Public Sub ActiveSheetsConcat()
       Or .FileFormat = xlExcel12
         Set wbkNewBook = wbkActive
         blnIsNewBookCreated = False
-        
+
       Case .FileFormat = xlWorkbookNormal _
       Or .FileFormat = xlExcel9795 _
       Or .FileFormat = xlExcel8 _
@@ -88,22 +88,22 @@ Public Sub ActiveSheetsConcat()
         wbkActive.Activate
     End Select
   End With
-  
+
   Set shtTotal = addset_sht(wbkNewBook, NAMESHTTOTAL)
-  
+
   Dim shtWork As Worksheet
   Dim rngFirstCell As Range
   For Each shtWork In wbkActive.Worksheets
-    
+
     With shtWork
       If NAMESHTTOTAL = .Name Then GoTo nexti
-      
+
       Set rngFirstCell = .Range("A1")
       lastrow = rngFirstCell.CurrentRegion.Rows.Count
       strNameShtWork = .Name
       rngDataCopy = .Range(rngFirstCell, .Cells(lastrow, DATACOPYCOLUMNS)).Value
     End With
-    
+
     With shtTotal
       Set rngFirstCell = .Range("A1")
       lastrow2 = rngFirstCell.CurrentRegion.Rows.Count + 1
@@ -113,7 +113,7 @@ Public Sub ActiveSheetsConcat()
       Set rngShtName = .Range(.Cells(lastrow2, 1), .Cells(lastrow2 + lastrow - 1, 1))
       rngShtName.Value2 = strNameShtWork
     End With
-    
+
 nexti:
   Next shtWork
   Select Case blnIsNewBookCreated
