@@ -1,4 +1,4 @@
-Attribute VB_Name = "MainModule"
+Attribute VB_Name = "mSheetConcat"
 Option Explicit
 
 Private Function SheetExistence( _
@@ -124,4 +124,7 @@ nexti:
       wbkActive.Close SaveChanges:=False
       wbkNewBook.Activate
   End Select
+
+  fToast.Show
+
 End Sub
