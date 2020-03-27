@@ -49,6 +49,8 @@ End Function
 Public Sub ActiveSheetsConcat()
   Application.Calculation = xlManual
 
+On Error GoTo ErrorHandler
+
   Dim shtTotal As Worksheet
   Dim rngDataPaste As Range
   Dim rngDataCopy As Variant
@@ -126,5 +128,11 @@ nexti:
   End Select
 
   fToast.Show
+
+Exit sub
+
+ErrorHandler:
+fDangerToast.LabelError.Caption = Err.Description & " " & Err.Number
+fDangerToast.Show
 
 End Sub
