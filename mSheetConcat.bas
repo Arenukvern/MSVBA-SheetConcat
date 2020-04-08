@@ -48,8 +48,9 @@ End Function
 
 Public Sub ActiveSheetsConcat()
   Application.Calculation = xlManual
-
-On Error GoTo ErrorHandler
+  Dim dangerText As String
+  Dim clsModeToast As cRuleToast
+  Set clsModeToast = New cRuleToast
 
   Dim shtTotal As Worksheet
   Dim rngDataPaste As Range
@@ -68,6 +69,7 @@ On Error GoTo ErrorHandler
   Set wbkActive = ActiveWorkbook
   ' We need to do check of an extension
   '
+  On Error GoTo ErrorHandler
   With wbkActive
     Select Case True
       Case .FileFormat = xlOpenXMLWorkbookMacroEnabled _
@@ -127,12 +129,10 @@ nexti:
       wbkNewBook.Activate
   End Select
 
-  fToast.Show
+  clsModeToast.OpenToast enmControlType.ectSuccess
 
 Exit sub
-
 ErrorHandler:
-fDangerToast.LabelError.Caption = Err.Description & " " & Err.Number
-fDangerToast.Show
-
+dangerText = Err.Description & " " & Err.Number
+clsModeToast.OpenToast enmControlType.ectDanger, dangerText
 End Sub
