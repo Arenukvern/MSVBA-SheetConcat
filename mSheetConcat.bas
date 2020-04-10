@@ -47,7 +47,10 @@ Private Function addset_sht( _
 End Function
 
 Public Sub ActiveSheetsConcat()
+  
+  On Error GoTo ErrorHandler
   Application.Calculation = xlManual
+  
   Dim dangerText As String
   Dim clsModeToast As cRuleToast
   Set clsModeToast = New cRuleToast
@@ -69,7 +72,7 @@ Public Sub ActiveSheetsConcat()
   Set wbkActive = ActiveWorkbook
   ' We need to do check of an extension
   '
-  On Error GoTo ErrorHandler
+ 
   With wbkActive
     Select Case True
       Case .FileFormat = xlOpenXMLWorkbookMacroEnabled _
