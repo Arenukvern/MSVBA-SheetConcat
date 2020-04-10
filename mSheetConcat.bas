@@ -6,7 +6,7 @@ Private Function SheetExistence( _
   ByVal strSheetNameToFind As String, _
   ByVal blnSheetExists As Boolean) As Boolean
   
-  Dim test as String
+  
 
   Dim objSheet As Object
     For Each objSheet In wbkActive.Worksheets
