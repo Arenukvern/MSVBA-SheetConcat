@@ -1,9 +1,10 @@
 # VBA-SheetConcat
 
-The macro writes data from all sheets in a book, creates a new sheet and transfers all data to a new sheet. If the book is saved in .xls format then a new book is created and the data is transferred to the new book
+<p>The macro writes data from all sheets in a book, creates a new sheet and transfers all data to a new sheet. If the book is saved in .xls format then a new book is created and the data is transferred to the new book</p>
+
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+<p>These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.</p>
 
 ### Prerequisites
 
@@ -26,20 +27,17 @@ Developer -> Visual Basic
 Open the folder with downloaded files, select all files
 and drag and drop into a book
 
-![alt text](https://dl4.joxi.net/drive/2020/04/10/0042/2948/2775940/40/1e30f89975.jpg "For exampel")
+![alt text](https://dl3.joxi.net/drive/2020/04/13/0042/2948/2775940/40/88381362c9.jpg "For exampel")
 
 
-## Running
+## Work process
 
 There is way to run added Macro:
 
 *Developer -> Code -> Macros*. Select Macro "SheetConcat", Click Run.
 
-### Work
-
-If you have data on different sheets and you would like them put together to one sheet, you can use the Macro "SheetConcat".
-
-Open the book with the sheets which need to merge and run the macro. After starting, the macro will create a new sheet and transfer to it all the data from all sheets sequentially one after another.
+<p>If you have data on different sheets and you would like them put together to one sheet, you can use the Macro "SheetConcat".</p>
+<p>Open the book with the sheets which need to merge and run the macro. After starting, the macro will create a new sheet and transfer to it all the data from all sheets sequentially one after another.</p>
 
 
 ## Contributing
