@@ -6,8 +6,6 @@ Private Function SheetExistence( _
   ByVal strSheetNameToFind As String, _
   ByVal blnSheetExists As Boolean) As Boolean
   
-  
-
   Dim objSheet As Object
     For Each objSheet In wbkActive.Worksheets
       If strSheetNameToFind = objSheet.Name _
@@ -50,8 +48,7 @@ Public Sub ActiveSheetsConcat()
   
   On Error GoTo ErrorHandler
   Application.Calculation = xlManual
-  
-  Dim dangerText As String
+    
   Dim clsModeToast As cRuleToast
   Set clsModeToast = New cRuleToast
 
@@ -136,6 +133,7 @@ nexti:
 
 Exit sub
 ErrorHandler:
+Dim dangerText As String
 dangerText = Err.Description & " " & Err.Number
 clsModeToast.OpenToast enmControlType.ectDanger, dangerText
 End Sub
