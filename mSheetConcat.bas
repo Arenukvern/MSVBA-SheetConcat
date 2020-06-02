@@ -1,11 +1,11 @@
-Attribute VB_Name = "MainModule"
+Attribute VB_Name = "mSheetConcat"
 Option Explicit
 
 Private Function SheetExistence( _
   ByRef wbkActive As Workbook, _
   ByVal strSheetNameToFind As String, _
   ByVal blnSheetExists As Boolean) As Boolean
-
+  
   Dim objSheet As Object
     For Each objSheet In wbkActive.Worksheets
       If strSheetNameToFind = objSheet.Name _
@@ -45,7 +45,12 @@ Private Function addset_sht( _
 End Function
 
 Public Sub ActiveSheetsConcat()
+  
+  On Error GoTo ErrorHandler
   Application.Calculation = xlManual
+    
+  Dim clsModeToast As cRuleToast
+  Set clsModeToast = New cRuleToast
 
   Dim shtTotal As Worksheet
   Dim rngDataPaste As Range
@@ -64,6 +69,7 @@ Public Sub ActiveSheetsConcat()
   Set wbkActive = ActiveWorkbook
   ' We need to do check of an extension
   '
+ 
   With wbkActive
     Select Case True
       Case .FileFormat = xlOpenXMLWorkbookMacroEnabled _
@@ -90,6 +96,7 @@ Public Sub ActiveSheetsConcat()
   End With
 
   Set shtTotal = addset_sht(wbkNewBook, NAMESHTTOTAL)
+
 
   Dim shtWork As Worksheet
   Dim rngFirstCell As Range
@@ -121,4 +128,12 @@ nexti:
       wbkActive.Close SaveChanges:=False
       wbkNewBook.Activate
   End Select
+
+  clsModeToast.OpenToast enmControlType.ectSuccess
+
+Exit sub
+ErrorHandler:
+Dim dangerText As String
+dangerText = Err.Description & " " & Err.Number
+clsModeToast.OpenToast enmControlType.ectDanger, dangerText
 End Sub
