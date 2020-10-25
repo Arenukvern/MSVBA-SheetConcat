@@ -36,7 +36,7 @@ Find the Visual Basic Editor within the Developer Ribbon Menu
 
 Open System Folder with downloaded files, extract archive to some folder in your PC. Then select extracted files and drag and drop into VBA file tree. You can see example below.
 
-![image](https://user-images.githubusercontent.com/62573386/97121391-ed2cc200-172e-11eb-99d8-85adcface1bc.png)
+![image](https://user-images.githubusercontent.com/62573386/97121666-25cd9b00-1731-11eb-8478-1911f062e114.png)
 
 That's all, now you can use the macro.
 
