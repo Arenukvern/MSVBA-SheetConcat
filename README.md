@@ -17,7 +17,7 @@ To install you need to download lastest release
 <!-- TODO: need to release 1 version and place link here -->
 
 ```
-MSVBA-SheetConcat
+sheets_concat_excel_vba_macro
 ```
 
 ### Installing
@@ -35,7 +35,7 @@ Find the Visual Basic Editor within the Developer Ribbon Menu
 
 Open System Folder with downloaded files, extract archive to some folder in your PC. Then select extracted files and drag and drop into VBA file tree. You can see example below.
 
-![example](https://dl3.joxi.net/drive/2020/04/13/0042/2948/2775940/40/88381362c9.jpg 'example')
+![image](https://user-images.githubusercontent.com/62573386/97121391-ed2cc200-172e-11eb-99d8-85adcface1bc.png)
 
 That's all, now you can use the macro.
 
