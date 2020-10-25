@@ -1,4 +1,5 @@
-# VBA-SheetConcat
+# Excel Vba Sheet Concat
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 
 ### Purpose
 
@@ -62,13 +63,11 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ## Authors
 
 -   **Anton Malofeev** - _Initial work_ - [Arenukvern](https://github.com/Arenukvern)
--   **Mihail Melnikov** - _Assist work_ - [mixev](https://github.com/mixev)
+-   **Mihail Melnikov** - _Maintainer_ - [mixev](https://github.com/mixev)
 
 <!-- See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project. -->
 
 ## License
-
-<!-- TODO: edit LICENSE file -->
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
